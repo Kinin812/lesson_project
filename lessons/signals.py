@@ -1,10 +1,11 @@
 # lessons/signals.py
+from django.db import transaction
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.db import transaction
 
-from .models import Lesson
-from .tasks import send_lesson_notification
+from lessons.models import Lesson
+from lessons.tasks import send_lesson_notification
+
 
 @receiver(post_save, sender=Lesson)
 def lesson_completed_handler(sender, instance: Lesson, created, **kwargs):
