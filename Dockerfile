@@ -7,12 +7,9 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-COPY pyproject.toml poetry.lock* /app/
+COPY pyproject.toml uv.lock* /app/
 
-RUN pip install --no-cache-dir poetry \
-    && poetry config virtualenvs.create false \
-    && poetry install --no-root --no-interaction --no-ansi \
-    && pip install uv
+RUN pip install uv
 
 COPY . /app
 
