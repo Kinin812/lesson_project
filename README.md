@@ -64,5 +64,7 @@ docker-compose exec web python manage.py createsuperuser
 
  - В логах: В терминале (docker-compose logs -f celery) появится сообщение об отправке уведомления.
 
+
+
 ### Authors
 [Kinin812](https://github.com/Kinin812)
