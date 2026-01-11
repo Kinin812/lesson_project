@@ -1,19 +1,15 @@
 FROM python:3.12-slim
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpq-dev \
-    && rm -rf /var/lib/apt/lists/*
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 
 WORKDIR /app
 
-COPY pyproject.toml uv.lock* /app/
+COPY pyproject.toml uv.lock ./
 
-RUN pip install uv
+RUN uv sync --frozen --no-dev
 
-COPY . /app
+ENV PATH="/app/.venv/bin:$PATH"
 
-ENV PYTHONUNBUFFERED=1 \
-    DJANGO_SETTINGS_MODULE=lesson_project.settings
+COPY . .
 
-EXPOSE 8000
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

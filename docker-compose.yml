@@ -22,49 +22,40 @@ services:
 
   web:
     build: .
-    command: sh -c "python -m uv run python manage.py migrate && python -m uv run python manage.py runserver 0.0.0.0:8000"
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
+      - /app/.venv
     ports:
-      - "${DJANGO_PORT:-8000}:8000"
+      - "8000:8000"
     env_file:
       - .env
-    environment:
-      - PYTHONUNBUFFERED=1
-      - DB_HOST=db
-      - REDIS_HOST=redis
     depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_started
+      - db
+      - redis
 
   celery:
     build: .
-    command: python -m uv run celery -A lesson_project worker -l info
+    command: celery -A lesson_project worker -l info
     volumes:
       - .:/app
-    environment:
-      - PYTHONUNBUFFERED=1
-      - DB_HOST=db
-      - REDIS_HOST=redis
+      - /app/.venv
+    env_file:
+      - .env
     depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_started
+      - db
+      - redis
 
   flower:
     build: .
-    command: python -m uv run celery -A lesson_project flower
+    command: celery -A lesson_project flower
     volumes:
       - .:/app
+      - /app/.venv
     ports:
       - "5555:5555"
-    environment:
-      - PYTHONUNBUFFERED=1
-      - DB_HOST=db
-      - REDIS_HOST=redis
+    env_file:
+      - .env
     depends_on:
       - redis
       - celery

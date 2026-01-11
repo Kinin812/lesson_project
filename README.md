@@ -70,7 +70,7 @@ docker-compose exec web python manage.py test lessons
     #### ** альтернатива: Можно использовать Django shell для создания урока:
 
 ```bash
-docker-compose exec web python -m uv run python manage.py shell
+docker-compose exec web python manage.py shell
 ```
 ```python
 from lessons.models import Lesson
