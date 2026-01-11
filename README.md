@@ -46,6 +46,15 @@ docker-compose up --build -d
 docker-compose exec web python manage.py createsuperuser
 ```
 
+### 4. Как запустить тесты
+
+Нужно запустить команду test внутри контейнера web.
+
+```bash
+docker-compose exec web python manage.py test lessons
+```
+
+
 ## 🧪 Как проверить работу
 
 Откройте админ-панель: Перейдите по адресу [http://localhost:8000/admin/](http://localhost:8000/admin/) и войдите под созданным суперпользователем.
