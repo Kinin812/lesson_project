@@ -29,7 +29,7 @@
 git clone https://github.com/Kinin812/lesson_project.git
 cd lesson_project
 
-# Создаем файл .env из примера (или вручную)
+# Переименовываем файл .env.example в .env (в рамках задания не делаем акцент на секреты) ))
 cp .env.example .env
 ```
 
