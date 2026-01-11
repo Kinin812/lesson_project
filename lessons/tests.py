@@ -17,7 +17,6 @@ class LessonNotificationTests(TestCase):
         и вызывается метод .delay() у задачи.
         """
         # 1. Создаем урок
-        # ИСПРАВЛЕНО: используем student_id вместо student
         lesson = Lesson.objects.create(
             title="Intro to Testing",
             student_id=self.student.id
@@ -52,14 +51,13 @@ class LessonNotificationTests(TestCase):
         """
         Тест 3: Проверяем, что уведомление НЕ отправляется при РЕДАКТИРОВАНИИ.
         """
-        # ИСПРАВЛЕНО: используем student_id
         lesson = Lesson.objects.create(
             title="Old Title",
             student_id=self.student.id
         )
-        mock_task_delay.reset_mock() # Сбрасываем счетчик вызовов
+        mock_task_delay.reset_mock()
 
-        # Теперь меняем название и сохраняем
+        # Меняем название и сохраняем
         lesson.title = "New Title"
         lesson.save()
 
