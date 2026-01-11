@@ -67,6 +67,16 @@ docker-compose exec web python manage.py test lessons
 
  - Нажмите Save.
 
+    #### ** альтернатива: Можно использовать Django shell для создания урока:
+
+```bash
+docker-compose exec web python -m uv run python manage.py shell
+```
+```python
+from lessons.models import Lesson
+lesson = Lesson.objects.create(title="New lesson", student_id=123)
+```
+
 Проверьте результат:
 
  - В Flower: Вы увидите новую задачу lessons.tasks.send_lesson_notification со статусом SUCCESS.
