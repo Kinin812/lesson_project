@@ -26,7 +26,7 @@
 Скачайте репозиторий и создайте файл переменных окружения:
 
 ```bash
-git clone <ССЫЛКА_НА_ВАШ_РЕПОЗИТОРИЙ>
+git clone https://github.com/Kinin812/lesson_project.git
 cd lesson_project
 
 # Создаем файл .env из примера (или вручную)
